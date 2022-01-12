@@ -4,6 +4,7 @@ import AddTask from "./components/AddTask";
 import { useState } from "react";
 
 const App = () => {
+  const [showForm, setShowForm] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id:1,
@@ -44,11 +45,15 @@ const App = () => {
     setTasks([...tasks, newTask]);
   }
 
+  // const showTaskForm = () => {
+  //   setShowForm(!showForm);
+  // }
+
   return (
     <>
     <div className="container">
-      <Header title="Task Tracker"/>
-      <AddTask onAdd={addTask}/>
+      <Header title="Task Tracker" onButtonClick={() => { setShowForm(!showForm)}} showAdd={showForm}/>
+      {showForm && <AddTask onAdd={addTask}/>}
       <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
     </div>
     </>
